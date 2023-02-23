@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      // angle的单位是度
+      let angle = 0.0;
+      function setup() {
+        createCanvas(600, 600);
+        background(0);
+        colorMode(HSB, 360, 100, 100, 1);
+
+        for (let angle = 0; angle < 360; angle += 0.2) {
+          stroke(random(220, 320), random(0, 100), random(50, 100));
+          let r = random(100, 280);
+          let x = width / 2 + cos(radians(angle)) * r;
+          let y = height / 2 + sin(radians(angle)) * r;
+          line(width / 2, height / 2, x, y);
+        }
+      }
+
+      function draw() {}
+    </script>
+  </body>
+</html>

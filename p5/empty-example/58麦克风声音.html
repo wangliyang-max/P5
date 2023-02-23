@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let mic, amp, r;
+      function setup() {
+        createCanvas(600, 600);
+        background(0);
+        // 获取麦克风
+        mic = new p5.AudioIn();
+        amp = new p5.Amplitude();
+        // 开始获取
+        mic.start();
+        amp.setInput(mic);
+      }
+      function draw() {
+        background(0, 10);
+        let level = amp.getLevel();
+        let r = map(level, 0, 1, 20, 600);
+        fill(random(255), random(255), random(255));
+        ellipse(width / 2, height / 2, r, r);
+      }
+
+      // 单击鼠标，恢复音频功能
+      function mousePressed() {
+        if (getAudioContext().state != "running") {
+          // 开始获取音频
+          getAudioContext().resume();
+        }
+      }
+
+      // 在画布上触摸，恢复音频功能
+      function touchStarted() {
+        if (getAudioContext().state != "running") {
+          // 开始获取音频
+          getAudioContext().resume();
+        }
+      }
+    </script>
+  </body>
+</html>

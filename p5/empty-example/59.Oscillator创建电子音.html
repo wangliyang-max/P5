@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let osc;
+      let playing = false;
+      function setup() {
+        createCanvas(600, 600);
+        background(0);
+
+        osc = new p5.Oscillator();
+        osc.setType("sine");
+        osc.amp(0.5);
+        osc.start();
+      }
+      function draw() {
+        // 鼠标指针的x轴决定频率
+        let hertz = map(mouseX, 0, width, 100, 160);
+        // 鼠标指针的y轴决定振幅
+        let amp = map(mouseY, 0, height, 0, 1);
+        fill(255 - amp * 255);
+        ellipse(width / 2, height / 2, hertz, hertz);
+        if (mouseIsPressed) {
+          // 当戍边按下的时候，根据鼠标位置创建对应频率的声音
+          if (playing === false) {
+            osc.start();
+            playing = true;
+          }
+          osc.freq(hertz);
+          osc.amp(amp);
+        } else {
+          // 鼠标抬起的时候声音停止
+          osc.stop();
+          playing = false;
+        }
+      }
+
+      // 单击鼠标，恢复音频功能
+      function mousePressed() {
+        if (getAudioContext().state != "running") {
+          // 开始获取音频
+          getAudioContext().resume();
+        }
+      }
+
+      // 在画布上触摸，恢复音频功能
+      function touchStarted() {
+        if (getAudioContext().state != "running") {
+          // 开始获取音频
+          getAudioContext().resume();
+        }
+      }
+    </script>
+  </body>
+</html>

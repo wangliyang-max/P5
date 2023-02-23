@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let Sound;
+      function preload() {
+        Sound = loadSound("sound.mp3");
+      }
+      function setup() {
+        createCanvas(320, 230);
+        amplitude = new p5.Amplitude();
+        background(0);
+      }
+      function draw() {
+        background(0, 5);
+        fill(255, random(255), random(255));
+        // 获取当前的振幅
+        let soundLevel = amplitude.getLevel();
+        let r = map(soundLevel, 0, 1, 0, 320);
+        ellipse(width / 2, height / 2, r, r);
+      }
+
+      function mousePressed() {
+        if (Sound.isPlaying()) {
+          Sound.pause();
+          background(0);
+        } else {
+          Sound.play();
+          background(255, 255, 0);
+        }
+      }
+    </script>
+  </body>
+</html>

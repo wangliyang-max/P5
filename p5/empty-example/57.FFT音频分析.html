@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let Sound;
+      let fft;
+      let amplitude;
+      function preload() {
+        Sound = loadSound("sound.mp3");
+      }
+      function setup() {
+        createCanvas(600, 600);
+        fft = new p5.FFT();
+        amplitude = new p5.Amplitude();
+      }
+      function draw() {
+        background(0, 5);
+        let level = amplitude.getLevel();
+        let r = map(level, 0, 1, 0, 150);
+        fill(random(255), 80, 80);
+        ellipse(width / 2, height / 2, r, r);
+
+        let waveform = fft.waveform();
+        noFill();
+        stroke(255, 80, 80, 60);
+        strokeWeight(200);
+        for (let i = 0; i < waveform.length; i++) {
+          // 旋转角度
+          let angle = map(0, 1024, 0, 360);
+          x = width / 2 + cos(angle) * 180;
+          y = height / 2 + sin(angle) * 180;
+
+          let r = map(waveform[i], -0.8, 0.8, 80, 300);
+          x1 = width / 2 + cos(angle) * r;
+          y1 = height / 2 + sin(angle) * r;
+          line(x, y, x1, y1);
+        }
+      }
+
+      function mousePressed() {
+        if (Sound.isPlaying()) {
+          Sound.pause();
+          background(0);
+        } else {
+          Sound.play();
+          background(255, 255, 0);
+        }
+      }
+    </script>
+  </body>
+</html>

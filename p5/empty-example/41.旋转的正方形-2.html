@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      class RotatingSquare {
+        // 构造函数
+        constructor(
+          squareX,
+          squareY,
+          squareSize,
+          squareColor,
+          squareTSpeed,
+          squareRSpeed
+        ) {
+          // -------------------属性---------------------
+
+          // 所在x坐标
+          this.squareX = squareX;
+          // 所在y坐标
+          this.squareY = squareY;
+          // 大小
+          this.squareSize = squareSize;
+          // 颜色
+          this.squareColor = squareColor;
+          // 移动速度
+          this.squareTSpeed = squareTSpeed;
+          // 旋转速度
+          this.squareRSpeed = squareRSpeed;
+          // 旋转角度
+          this.angle = 0;
+        }
+
+        // -------------------方法---------------------
+        // 平移
+        translating() {
+          push();
+          translate(this.squareX, this.squareY);
+          this.squareX += random(-this.squareTSpeed, this.squareTSpeed);
+          this.squareY += random(-this.squareTSpeed, this.squareTSpeed);
+        }
+
+        // 旋转
+        rotating() {
+          rotate(this.angle);
+          this.angle += this.squareRSpeed;
+        }
+
+        // 绘画
+        drawing() {
+          fill(this.squareColor);
+          rect(0, 0, this.squareSize, this.squareSize);
+          pop();
+        }
+      }
+
+      let rSquare = [];
+
+      function setup() {
+        createCanvas(600, 600);
+        background(200);
+        rectMode(CENTER);
+        // 创建实例
+        for (let i = 0; i < 50; i++) {
+          let x = random(width);
+          let y = random(height);
+          let s = random(10, 45);
+          let c = random(255);
+          let tSpeed = random(2, 3);
+          let rSpeed = 0.1;
+          rSquare[i] = new RotatingSquare(x, y, s, c, tSpeed, rSpeed);
+        }
+      }
+
+      function draw() {
+        for (let i = 0; i < rSquare.length; i++) {
+          rSquare[i].translating();
+          rSquare[i].rotating();
+          rSquare[i].drawing();
+        }
+      }
+    </script>
+  </body>
+</html>

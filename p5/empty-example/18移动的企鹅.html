@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let x = 0;
+      let y = 0;
+      let body = 255;
+      let eye = 120;
+
+      // 缓动
+      let easing = 0.1;
+
+      function setup() {
+        createCanvas(1000, 1000);
+        background(200);
+      }
+
+      function draw() {
+        let targetX = mouseX - 150;
+        let targetY = mouseY - 150;
+        x += (targetX - x) * easing;
+        y += (targetY - y) * easing;
+
+        // 当鼠标按下的时候且改变形态
+        if (mouseIsPressed) {
+          body = 300;
+          eye = 60;
+        } else {
+          body = 255;
+          eye = 120;
+        }
+
+        background(200);
+        // 两条腿
+        noStroke();
+        fill(255, 160, 45);
+        ellipse(x + 100, y + body + 350, 100, 50);
+        ellipse(x + 300, y + body + 350, 100, 50);
+
+        // 身体
+        fill(0);
+        ellipse(x + 50, y + 440, 60, 235);
+        ellipse(x + 350, y + 440, 60, 235);
+        rect(x + 50, y + 350, 300, body);
+        stroke(0);
+        strokeWeight(300);
+        line(x + 200, y + 265, x + 200, y + 380);
+
+        // 眼睛和肚皮
+        fill(255);
+        noStroke();
+        ellipse(x + 130, y + 270, eye, eye);
+        ellipse(x + 270, y + 270, eye, eye);
+        ellipse(x + 200, y + 445, 200, 200);
+
+        // 眼球
+        fill(0);
+        ellipse(x + 130, y + 270, eye / 5, eye / 5);
+        ellipse(x + 270, y + 270, eye / 5, eye / 5);
+
+        // 嘴巴
+        noStroke();
+        fill(255, 160, 45);
+        triangle(x + 185, y + 300, x + 215, y + 300, x + 200, y + 325);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      function setup() {
+        createCanvas(300, 300);
+        fill(255);
+        background(0);
+      }
+
+      function draw() {
+        if (keyIsPressed) {
+          console.log("key---", key);
+          if (key === "t" || key === "T") {
+            // 覆盖之前的图像，相当于清空画布
+            background(0);
+            triangle(150, 30, 30, 270, 270, 270);
+          }
+
+          if (key === "e" || key === "E") {
+            // 覆盖之前的图像，相当于清空画布
+            background(0);
+            ellipse(150, 150, 250, 250);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

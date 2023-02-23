@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script> -->
+    <!-- <script src="sketch.js"></script> -->
+  </head>
+  <body>
+    <script>
+      function setup() {
+        // 设置程序初始状态的代码（画布大小、刷新频率、色彩模式）
+        // 创建画布
+        createCanvas(600, 600);
+        background(200);
+        // rectMode(CENTER);
+      }
+
+      function draw() {
+        // 图形绘制的功能代码（色彩填充、绘制图像）
+        // 绘制点
+        // point(100, 100);
+        // 直线
+        // line(200, 200, 300, 300);
+        // 三角形(逆时针连接点)
+        // triangle(80, 95, 200, 220, 360, 120);
+        // 四边形(顺时针连接点)
+        // quad(80, 95, 200, 220, 235, 420, 115, 300);
+        // quad(200, 220, 360, 120, 380, 300, 235, 420);
+        // 矩形
+        // rect(100, 100, 100, 200);
+        // ellipse(200, 200, 200, 100);
+        // arc(200, 200, 200, 100, 0, 3.14);
+        // bezier(100, 200, 120, 10, 300, 10, 400, 200);
+        noFill();
+        bezier(50, 200, 250, 300, 90, 50, 220, 90);
+      }
+    </script>
+  </body>
+</html>

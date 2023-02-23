@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let video;
+      function setup() {
+        video = createCapture(VIDEO);
+        createCanvas(640, 480);
+        video.size(640, 480);
+        video.hide();
+        rectMode(CENTER);
+        background(0);
+        noStroke();
+      }
+      function draw() {
+        let radius = int(
+          sqrt(video.width * video.width + video.height * video.height) / 2.5
+        );
+        background(0);
+        // 加载图片的像素点都存储在video.pixels数组中
+        video.loadPixels();
+
+        for (let y = 0; y < video.height; y += 4) {
+          for (let x = 0; x < video.width; x += 4) {
+            let i = 4 * (y * width + x);
+            let r = video.pixels[i];
+            let g = video.pixels[i + 1];
+            let b = video.pixels[i + 2];
+
+            // dist函数计算两个点之间的距离
+            let distance = int(dist(x, y, video.width / 2, video.height / 2));
+
+            let newX;
+            let newY;
+            if (distance < radius / 2) {
+              newX = ((x - 320) * distance) / radius + 640;
+              newY = ((x - 240) * distance) / radius + 480;
+            }
+            push();
+            translate(width - newX, newY);
+            // fill(r, g, b);
+            fill(255, 0, 0);
+            rect(0, 0, 6, 6);
+            pop();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <!-- 引入scribble -->
+    <script src="../p5.play.js"></script>
+  </head>
+  <body>
+    <script>
+      let animal;
+
+      function preload() {
+        // 导入关键帧序列
+        animal = loadAnimation("img/animate_01.png", "img/animate_09.png");
+      }
+      function setup() {
+        createCanvas(500, 500);
+      }
+      function draw() {
+        background(200);
+        drawSprites();
+      }
+      function mousePressed() {
+        // 单击鼠标之后在鼠标的位置创建Sprite元素
+        let animateSprite = createSprite(mouseX, mouseY, 360, 360);
+        // 设置缩放比例
+        animateSprite.scale = random(0.1, 0.3);
+        // 加载序列帧动画
+        animateSprite.addAnimation("floating", animal);
+        // 设置初始x速度
+        animateSprite.velocity.x = random(-3, 3);
+        // 色织初始y速度
+        animateSprite.velocity.y = random(-3, 3);
+      }
+    </script>
+  </body>
+</html>
+)

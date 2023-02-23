@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let speed = 3;
+      let d = 50;
+      let x;
+      let y;
+      let c = 0;
+      function setup() {
+        createCanvas(480, 480);
+        x = width / 2;
+        y = height / 2;
+        colorMode(HSB, 360, 100, 100, 1);
+      }
+
+      function draw() {
+        c += 0.1;
+        if (c > 360) {
+          c = 0;
+        }
+        noStroke();
+        fill(c, 100, 100, 0.5);
+        x += random(-speed, speed);
+        y += random(-speed, speed);
+        x = constrain(x, 0, width);
+        y = constrain(y, 0, height);
+        ellipse(x, y, d, d);
+      }
+    </script>
+  </body>
+</html>

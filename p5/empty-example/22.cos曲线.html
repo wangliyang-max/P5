@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      // angle的单位是度
+      let angle = 0.0;
+      function setup() {
+        createCanvas(360, 240);
+        smooth();
+      }
+
+      function draw() {
+        let cosVal = cos(radians(angle)); //sin和cos需要使用弧度计算，radians将角度转换成弧度
+        cosVal = map(cosVal, -1, 1, 0, 360 / PI);
+        point(angle, cosVal);
+        if (angle < 360) {
+          angle += 1;
+        }
+      }
+    </script>
+  </body>
+</html>

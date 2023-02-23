@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let boxWidth = 9;
+      let boxHeight = 9;
+      function setup() {
+        createCanvas(600, 600);
+        background(0);
+        noStroke();
+        for (let x = 0; x < 600; x += 100) {
+          for (let y = 0; y < 600; y += 100) {
+            fill(255, random(120), random(120)); //绿色和蓝色通道随机填充橘红颜色
+            rect(x, y, 100, 100);
+            fill(random(120), random(120), 255); //红色和绿色通道随机填充蓝紫色色
+            beginShape();
+            for (let a = 0; a < 500; a++) {
+              vertex(x + random(100), y + random(100));
+            }
+            endShape(CLOSE);
+          }
+        }
+      }
+
+      function draw() {}
+    </script>
+  </body>
+</html>

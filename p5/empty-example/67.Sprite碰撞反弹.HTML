@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <!-- 引入scribble -->
+    <script src="../p5.play.js"></script>
+  </head>
+  <body>
+    <script>
+      let animal;
+      let animalGroup;
+
+      function preload() {
+        // 导入关键帧序列
+        animal = loadAnimation("img/animate_01.png", "img/animate_09.png");
+      }
+      function setup() {
+        createCanvas(500, 500);
+        // 创建Sprite元素数组
+        animalGroup = new Group();
+      }
+      function draw() {
+        background(200);
+        // 添加反弹功能
+        animalGroup.bounce(animalGroup);
+        // 触碰到画布边缘进行回弹
+        for (let i = 0; i < allSprites.length; i++) {
+          let s = allSprites[i];
+          if (s.position.x < 0) {
+            s.position.x = 1;
+            s.velocity.x = abs(s.velocity.x);
+          }
+          if (s.position.x > width) {
+            s.position.x = width - 1;
+            s.velocity.x = -abs(s.velocity.x);
+          }
+          if (s.position.y < 0) {
+            s.position.y = 1;
+            s.velocity.y = abs(s.velocity.y);
+          }
+          if (s.position.y > height) {
+            s.position.y = height - 1;
+            s.velocity.y = -abs(s.velocity.y);
+          }
+        }
+
+        drawSprites();
+      }
+      function mousePressed() {
+        // 单击鼠标之后在鼠标的位置创建Sprite元素
+        let animateSprite = createSprite(mouseX, mouseY);
+        // 半径为180的圆形碰撞体
+        animateSprite.setCollider("circle", -2, 2, 180);
+        // 设置speed
+        animateSprite.setSpeed(random(3), random(0, 360));
+        // 设置缩放比例
+        animateSprite.scale = random(0.1, 0.3);
+        // 加载序列帧动画
+        animateSprite.addAnimation("floating", animal);
+        // Sprite的元素质量
+        animateSprite.mass = animateSprite.scale;
+        animalGroup.add(animateSprite);
+      }
+    </script>
+  </body>
+</html>
+)

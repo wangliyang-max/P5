@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.dom.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let osc;
+      // 振幅
+      let silderAmp;
+      // 频率
+      let silderHertz;
+
+      function setup() {
+        createCanvas(600, 500);
+        // 创建滚动条
+        silderAmp = createSlider(0, 100, 50);
+        silderAmp.position(120, 450);
+        // 创建滚动条
+        silderHertz = createSlider(20, 12800, 1000);
+        silderHertz.position(320, 450);
+        background(0);
+        osc = new p5.Oscillator();
+        osc.setType("sine");
+        osc.start();
+      }
+      function draw() {
+        background(0);
+        stroke(255);
+        for (let i = 0; i < 10000; i++) {
+          let angle = map(i, 0, 10000, 0, TWO_PI * silderHertz.value());
+          let sinValue = sin(angle) * 120;
+          line(i, 0, i, height / 2 + sinValue);
+        }
+
+        // 通过两个滚动条控制呻吟的频率和振幅
+        // 通过滚动条给振幅赋值
+        osc.amp(map(silderAmp.value(), 0, 100, 0, 1), 0.5);
+        // 通过滚动条给频率赋值
+        osc.freq(silderHertz.value());
+      }
+
+      // 单击鼠标，恢复音频功能
+      function mousePressed() {
+        if (getAudioContext().state != "running") {
+          // 开始获取音频
+          getAudioContext().resume();
+        }
+      }
+
+      // 在画布上触摸，恢复音频功能
+      function touchStarted() {
+        if (getAudioContext().state != "running") {
+          // 开始获取音频
+          getAudioContext().resume();
+        }
+      }
+    </script>
+  </body>
+</html>

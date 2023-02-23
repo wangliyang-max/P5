@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
+    <script src="../p5.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let a = 0;
+      function setup() {
+        createCanvas(300, 300);
+        background(0);
+      }
+
+      function draw() {
+        a += 0.1;
+        translate(mouseX, mouseY);
+        rotate(a);
+        scale(map(mouseX, 0, 600, 0, 1));
+        rect(0, 0, 100, 100);
+      }
+    </script>
+  </body>
+</html>
